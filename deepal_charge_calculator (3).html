@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณเวลาชาร์จ Deepal S05 BEV</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #FFD700;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 1em;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        input {
+            width: 250px;
+        }
+        button {
+            background-color: #FFD700;
+            color: #121212;
+            cursor: pointer;
+        }
+        .result-group {
+            background-color: #1e1e1e;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .result-group h2 {
+            color: #00FFFF;
+            margin-bottom: 10px;
+        }
+        .result-group p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>คำนวณเวลาชาร์จ Deepal S05 BEV</h1>
+    <input type="number" id="batteryInput" placeholder="ปริมาณแบตเตอร์รี่คงเหลือ (%)" min="0" max="100">
+    <button onclick="calculate()">คำนวณ</button>
+    <div id="results"></div>
+
+    <script>
+        const batteryCapacity = 56.1; // kWh
+
+        function formatTime(hours) {
+            const totalMinutes = Math.round(hours * 60);
+            const days = Math.floor(totalMinutes / (24 * 60));
+            const remainingMinutes = totalMinutes % (24 * 60);
+            const hrs = Math.floor(remainingMinutes / 60);
+            const mins = remainingMinutes % 60;
+            if (days > 0) {
+                return `${days} วัน ${hrs} ชั่วโมง ${mins} นาที`;
+            } else {
+                return `${hrs} ชั่วโมง ${mins} นาที`;
+            }
+        }
+
+        function calculate() {
+            const currentPercent = parseFloat(document.getElementById("batteryInput").value);
+            if (isNaN(currentPercent) || currentPercent < 0 || currentPercent > 100) {
+                alert("กรุณากรอกค่าที่ถูกต้องระหว่าง 0 ถึง 100");
+                return;
+            }
+
+            const targetPercents = [80, 100];
+            const currents = [8, 13, 16, 32];
+            const voltage = 230; // Standard single-phase voltage
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            currents.forEach(current => {
+                const power = (current * voltage) / 1000; // kW
+                const groupDiv = document.createElement("div");
+                groupDiv.className = "result-group";
+                const title = document.createElement("h2");
+                title.textContent = `ชาร์จที่กระแส ${current} แอมป์`;
+                groupDiv.appendChild(title);
+
+                targetPercents.forEach(target => {
+                    const energyNeeded = batteryCapacity * (target - currentPercent) / 100;
+                    const timeHours = energyNeeded / power;
+                    const timeText = formatTime(timeHours);
+                    const p = document.createElement("p");
+                    p.textContent = `ต้องใช้เวลา ${timeText} ถึงจะได้แบตฯ ${target}%`;
+                    groupDiv.appendChild(p);
+                });
+
+                resultsDiv.appendChild(groupDiv);
+            });
+        }
+    </script>
+</body>
+</html>
