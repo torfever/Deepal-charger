@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คำนวณเวลาชาร์จ Deepal S05 BEV</title>
+    <title>Deepal S05 BEV Charging Time Calculator</title>
     <style>
         body {
             background-color: #121212;
@@ -53,9 +53,9 @@
     </style>
 </head>
 <body>
-    <h1>คำนวณเวลาชาร์จ Deepal S05 BEV</h1>
-    <input type="number" id="batteryInput" placeholder="ปริมาณแบตเตอร์รี่คงเหลือ (%)" min="0" max="100">
-    <button onclick="calculate()">คำนวณ</button>
+    <h1>Deepal S05 BEV Charging Time Calculator</h1>
+    <input type="number" id="batteryInput" placeholder="Remaining Battery (%)" min="0" max="100">
+    <button onclick="calculate()">calculate</button>
     <div id="results"></div>
 
     <script>
@@ -68,16 +68,16 @@
             const hrs = Math.floor(remainingMinutes / 60);
             const mins = remainingMinutes % 60;
             if (days > 0) {
-                return `${days} วัน ${hrs} ชั่วโมง ${mins} นาที`;
+                return `${days} days ${hrs} Hrs. ${mins} Minutes`;
             } else {
-                return `${hrs} ชั่วโมง ${mins} นาที`;
+                return `${hrs} Hrs. ${mins} Minutes`;
             }
         }
 
         function calculate() {
             const currentPercent = parseFloat(document.getElementById("batteryInput").value);
             if (isNaN(currentPercent) || currentPercent < 0 || currentPercent > 100) {
-                alert("กรุณากรอกค่าที่ถูกต้องระหว่าง 0 ถึง 100");
+                alert("Please enter a valid value between 0 and 100");
                 return;
             }
 
@@ -100,7 +100,7 @@
                     const timeHours = energyNeeded / power;
                     const timeText = formatTime(timeHours);
                     const p = document.createElement("p");
-                    p.textContent = `ต้องใช้เวลา ${timeText} ถึงจะได้แบตฯ ${target}%`;
+                    p.textContent = `It will take ${timeText} to reach battery ${target}%`;
                     groupDiv.appendChild(p);
                 });
 
