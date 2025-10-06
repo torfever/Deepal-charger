@@ -68,9 +68,9 @@
             const hrs = Math.floor(remainingMinutes / 60);
             const mins = remainingMinutes % 60;
             if (days > 0) {
-                return `${days} days ${hrs} Hrs. ${mins} Minutes`;
+                return `${days} days ${hrs} Hrs. ${mins} Min.`;
             } else {
-                return `${hrs} Hrs. ${mins} Minutes`;
+                return `${hrs} Hrs. ${mins} Min.`;
             }
         }
 
@@ -92,7 +92,7 @@
                 const groupDiv = document.createElement("div");
                 groupDiv.className = "result-group";
                 const title = document.createElement("h2");
-                title.textContent = `ชาร์จที่กระแส ${current} แอมป์`;
+                title.textContent = `Charging at ${current} A`;
                 groupDiv.appendChild(title);
 
                 targetPercents.forEach(target => {
