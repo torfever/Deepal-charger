@@ -14,41 +14,61 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         h1 {
             text-align: center;
             margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
         }
         input, button {
-            padding: 10px;
-            font-size: 1em;
-            margin: 10px;
-            border-radius: 5px;
+            padding: 12px;
+            font-size: 1.1em;
+            margin: 5px;
+            border-radius: 8px;
             border: none;
+            text-align: center;
         }
         input {
-            width: 250px;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         button {
             background-color: #FFD700;
             color: #121212;
             cursor: pointer;
+            font-weight: bold;
+            width: 320px;
         }
         .result-group {
-            background-color: #1e1e1e;
+            background-color: rgba(30, 30, 30, 0.85);
             border: 2px solid #FFD700;
             border-radius: 10px;
             padding: 15px;
             margin: 15px;
             width: 90%;
             max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
         .result-group h2 {
             color: #00FFFF;
             margin-bottom: 10px;
+            text-align: center;
         }
         .result-group p {
-            margin: 5px 0;
+            margin: 8px 0;
+            font-size: 1.1em;
         }
     </style>
 </head>
